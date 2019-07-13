@@ -6,10 +6,13 @@ import os
 import json
 import PIL
 import sys
+
+
 PIL.Image.MAX_IMAGE_PIXELS = 933120000
-filePath = sys.argv[1]
-print("filepath:",filePath)
-def pdf2text():
+
+
+
+def pdf2text(filePath):
 
     PDF_file = filePath
     
@@ -86,5 +89,3 @@ def pdf2text():
     f.close() 
 
     return json.dumps('out.txt')
-
-pdf2text()
