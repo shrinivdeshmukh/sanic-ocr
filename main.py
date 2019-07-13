@@ -11,9 +11,9 @@ config = {}
 config["upload"] = "./tests/uploads"
 
 @app.route('/upload',methods=['POST'])
-async def post_json(request):
+def post_json(request):
     if not os.path.exists(config["upload"]):
-        await os.makedirs(config["upload"])
+        os.makedirs(config["upload"])
     test_file = request.files.get('file')
     file_parameters = {
         'body': test_file.body,
@@ -32,4 +32,4 @@ async def post_json(request):
         return json({ "received": False, "file_names": request.files.keys(), "success": False, "status": "invalid file uploaded" })
 
 if __name__ == '__main__':
-    app.run()
+    app.run(host='10.142.0.2')
