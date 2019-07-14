@@ -4,13 +4,16 @@ from pathlib import os
 from datetime import datetime
 from service.ocr import pdf2text
 
+import jinja2
+import jinja2_sanic
 
-app = Sanic()
+app = Sanic("sanic_jinja2_render")
 
 config = {}
 config["upload"] = "./tests/uploads"
 
-@app.route('/upload',methods=['POST'])
+
+@app.route('/upload', methods=['POST'])
 def post_json(request):
     if not os.path.exists(config["upload"]):
         os.makedirs(config["upload"])
@@ -25,11 +28,12 @@ def post_json(request):
         with open(file_path, 'wb') as f:
             f.write(file_parameters['body'])
         f.close()
-        print('file wrote to disk',file_path)
+        print('file wrote to disk', file_path)
         ocr_response = pdf2text(file_path)
-        return json({ "received": True, "file_names": request.files.keys(), "success": True })
+        return json({"received": True, "file_names": request.files.keys(), "success": True})
     else:
-        return json({ "received": False, "file_names": request.files.keys(), "success": False, "status": "invalid file uploaded" })
+        return json({"received": False, "file_names": request.files.keys(), "success": False, "status": "invalid file uploaded"})
+
 
 if __name__ == '__main__':
-    app.run(host='10.142.0.2')
+    app.run()

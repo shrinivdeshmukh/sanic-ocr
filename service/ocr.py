@@ -88,4 +88,4 @@ def pdf2text(filePath):
     # Close the file after writing all the text. 
     f.close() 
 
-    return json.dumps('out.txt')
+    return json.dumps({'text':text})
