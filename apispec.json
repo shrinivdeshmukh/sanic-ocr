@@ -1,0 +1,1772 @@
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Powecred-Bank-E-statement-Upload",
+    "description": "This is OpenAPI v3 for Powercred-bank-estatement-ocr",
+    "version": "0.1.0",
+    "x-logo": {
+      "url": "https://storage.googleapis.com/powercred/image.png"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://mock.powercred.io/bank"
+    }
+  ],
+  "security": [
+    {
+      "ApiKeyAuth": [
+
+      ]
+    }
+  ],
+  "paths": {
+    "/analysis": {
+      "post": {
+        "summary": "Method",
+        "operationId": "method_analysis_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/analysis/modules": {
+      "post": {
+        "summary": "Method",
+        "operationId": "method_analysis_modules_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Modules",
+              "type": "string"
+            },
+            "name": "modules",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Bank Name",
+              "type": "string"
+            },
+            "name": "bank_name",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/analysis/statement": {
+      "get": {
+        "summary": "Method",
+        "operationId": "method_analysis_statement_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          },
+          {
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/api__models__request__BankNames"
+            },
+            "name": "bank_name",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Method",
+        "operationId": "method_analysis_statement_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          },
+          {
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/api__models__request__BankNames"
+            },
+            "name": "bank_name",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stmt/upload": {
+      "post": {
+        "summary": "Method",
+        "operationId": "method_stmt_upload_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Password",
+              "type": "string"
+            },
+            "name": "password",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Is Img",
+              "type": "boolean",
+              "default": false
+            },
+            "name": "is_img",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Bankname",
+              "type": "string"
+            },
+            "name": "bankname",
+            "in": "query"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_method_stmt_upload_post"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stmt/upload/img": {
+      "post": {
+        "summary": "Method",
+        "operationId": "method_stmt_upload_img_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_method_stmt_upload_img_post"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stmt/publish": {
+      "post": {
+        "summary": "Method",
+        "operationId": "method_stmt_publish_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/Region"
+            },
+            "name": "region",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ocr/terms": {
+      "get": {
+        "summary": "Method",
+        "operationId": "method_ocr_terms_get",
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Method",
+        "operationId": "method_ocr_terms_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/OCRTerms"
+            },
+            "name": "ocr_terms",
+            "in": "query"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Term List",
+                "type": "array",
+                "items": {
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ocr/delete/terms": {
+      "post": {
+        "summary": "Method",
+        "operationId": "method_ocr_delete_terms_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/OCRTerms"
+            },
+            "name": "ocr_terms",
+            "in": "query"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Term List",
+                "type": "array",
+                "items": {
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions/init": {
+      "post": {
+        "summary": "Method",
+        "operationId": "method_transactions_init_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/api__routes__transactions__BankNames"
+            },
+            "name": "bank_name",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions/names": {
+      "get": {
+        "summary": "Method",
+        "operationId": "method_transactions_names_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/TransactionType"
+                }
+              ],
+              "default": "ALL"
+            },
+            "name": "transactions_type",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions/smartsheet": {
+      "post": {
+        "summary": "Method",
+        "operationId": "method_transactions_smartsheet_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          },
+          {
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/SmartsheetTransactionType"
+            },
+            "name": "transaction_type",
+            "in": "query"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Names",
+                "type": "array",
+                "items": {
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions/credit": {
+      "post": {
+        "summary": "Method",
+        "operationId": "method_transactions_credit_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/TransactionType"
+                }
+              ],
+              "default": "ALL"
+            },
+            "name": "transaction_type",
+            "in": "query"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "title": "Exclude Names",
+                "type": "array",
+                "items": {
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions/analysis": {
+      "post": {
+        "summary": "Method",
+        "operationId": "method_transactions_analysis_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/api__routes__transactions__BankNames"
+            },
+            "name": "bank_name",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Generate Excel",
+              "type": "boolean",
+              "default": true
+            },
+            "name": "generate_excel",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Account Number",
+              "type": "string"
+            },
+            "name": "account_number",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Categorize",
+              "type": "boolean",
+              "default": false
+            },
+            "name": "categorize",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions/analysis/consolidate": {
+      "post": {
+        "summary": "Method",
+        "operationId": "method_transactions_analysis_consolidate_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/api__routes__transactions__BankNames"
+            },
+            "name": "bank_name",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Acc Number",
+              "type": "string"
+            },
+            "name": "acc_number",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions/balances": {
+      "post": {
+        "summary": "Method",
+        "operationId": "method_transactions_balances_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/TransactionType"
+                }
+              ],
+              "default": "ALL"
+            },
+            "name": "transaction_type",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/api__routes__transactions__BankNames"
+            },
+            "name": "bank_name",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Generate Excel",
+              "type": "boolean",
+              "default": true
+            },
+            "name": "generate_excel",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Account Number",
+              "type": "string"
+            },
+            "name": "account_number",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions/balances/eod": {
+      "post": {
+        "summary": "Method",
+        "operationId": "method_transactions_balances_eod_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/api__routes__transactions__BankNames"
+            },
+            "name": "bank_name",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Acc Number",
+              "type": "string"
+            },
+            "name": "acc_number",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Generate Excel",
+              "type": "boolean",
+              "default": true
+            },
+            "name": "generate_excel",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions/debug": {
+      "post": {
+        "summary": "Method",
+        "operationId": "method_transactions_debug_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/TransactionType"
+            },
+            "name": "transactions_type",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/api__routes__transactions__BankNames"
+            },
+            "name": "bank_name",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions/analysis/smartsheet": {
+      "post": {
+        "summary": "Method",
+        "operationId": "method_transactions_analysis_smartsheet_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/api__routes__transactions__BankNames"
+            },
+            "name": "bank_name",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions/fraud": {
+      "post": {
+        "summary": "Method",
+        "operationId": "method_transactions_fraud_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/api__routes__transactions__BankNames"
+            },
+            "name": "bank_name",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Account Number",
+              "type": "string"
+            },
+            "name": "account_number",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Generate Excel",
+              "type": "boolean",
+              "default": true
+            },
+            "name": "generate_excel",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions/analysis/check/tamper": {
+      "post": {
+        "summary": "Method",
+        "operationId": "method_transactions_analysis_check_tamper_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/api__routes__transactions__BankNames"
+            },
+            "name": "bank_name",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Generate Excel",
+              "type": "boolean",
+              "default": true
+            },
+            "name": "generate_excel",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions/fetch": {
+      "get": {
+        "summary": "Method",
+        "operationId": "method_transactions_fetch_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Account Number",
+              "type": "string"
+            },
+            "name": "Account_number",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/api__routes__transactions__BankNames"
+            },
+            "name": "bank_name",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Categorize",
+              "type": "boolean",
+              "default": false
+            },
+            "name": "categorize",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions/init/terms/institutions/financial": {
+      "post": {
+        "summary": "Method",
+        "operationId": "method_transactions_init_terms_institutions_financial_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions/init/terms/blacklisted": {
+      "post": {
+        "summary": "Method",
+        "operationId": "method_transactions_init_terms_blacklisted_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "App Id",
+              "type": "string"
+            },
+            "name": "app_id",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/transactions/init/terms/ewallets": {
+      "post": {
+        "summary": "Method",
+        "operationId": "method_transactions_init_terms_ewallets_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blacklist": {
+      "get": {
+        "summary": "Method",
+        "operationId": "method_blacklist_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "App Id",
+              "type": "string"
+            },
+            "name": "app_id",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Method",
+        "operationId": "method_blacklist_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "App Id",
+              "type": "string"
+            },
+            "name": "app_id",
+            "in": "query"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_method_blacklist_post"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/blacklist/tagging": {
+      "post": {
+        "summary": "Method",
+        "operationId": "method_blacklist_tagging_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "App Id",
+              "type": "string"
+            },
+            "name": "app_id",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/redirect/data": {
+      "post": {
+        "summary": "Method",
+        "operationId": "method_redirect_data_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/redirect/message": {
+      "post": {
+        "summary": "Method",
+        "operationId": "method_redirect_message_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Message",
+              "type": "string"
+            },
+            "name": "message",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "query",
+        "name": "apikey"
+      }
+    },
+    "schemas": {
+      "Body_method_blacklist_post": {
+        "title": "Body_method_blacklist_post",
+        "type": "object",
+        "properties": {
+          "files": {
+            "title": "Files",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "binary"
+            }
+          }
+        }
+      },
+      "Body_method_stmt_upload_img_post": {
+        "title": "Body_method_stmt_upload_img_post",
+        "type": "object",
+        "properties": {
+          "files": {
+            "title": "Files",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "binary"
+            }
+          }
+        }
+      },
+      "Body_method_stmt_upload_post": {
+        "title": "Body_method_stmt_upload_post",
+        "type": "object",
+        "properties": {
+          "files": {
+            "title": "Files",
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "binary"
+            }
+          }
+        }
+      },
+      "HTTPValidationError": {
+        "title": "HTTPValidationError",
+        "type": "object",
+        "properties": {
+          "detail": {
+            "title": "Detail",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            }
+          }
+        }
+      },
+      "OCRTerms": {
+        "title": "OCRTerms",
+        "enum": [
+          "banking_terms",
+          "bank_names",
+          "month_abv",
+          "start_prefix",
+          "end_suffix",
+          "deposit_prefix",
+          "month_trans"
+        ],
+        "description": "An enumeration."
+      },
+      "Region": {
+        "title": "Region",
+        "enum": [
+          "INDONESIA",
+          "MALAYSIA"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "SmartsheetTransactionType": {
+        "title": "SmartsheetTransactionType",
+        "enum": [
+          "CREDIT",
+          "DEBIT"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "TransactionType": {
+        "title": "TransactionType",
+        "enum": [
+          "CREDIT",
+          "DEBIT",
+          "ALL"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "ValidationError": {
+        "title": "ValidationError",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "loc": {
+            "title": "Location",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        }
+      },
+      "api__models__request__BankNames": {
+        "title": "BankNames",
+        "enum": [
+          "BCA",
+          "MANDIRI",
+          "BRI",
+          "BNI",
+          "OCBC",
+          "PERMATA",
+          "CIMB",
+          "MAYBANK",
+          "multi_bank_ocr"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "api__routes__transactions__BankNames": {
+        "title": "BankNames",
+        "enum": [
+          "BCA",
+          "MANDIRI",
+          "BRI",
+          "BNI",
+          "OCBC",
+          "PERMATA",
+          "CIMB",
+          "MAYBANK"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      }
+    }
+  }
+}
