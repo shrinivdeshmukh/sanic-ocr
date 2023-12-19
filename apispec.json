@@ -1,1 +1,1021 @@
-{"openapi":"3.0.2","info":{"title":"ClientOAuth","description":"This is OpenAPI v3 for Powercred-ClientOAuth","version":"0.1.0","x-logo":{"url":"https://storage.googleapis.com/powercred/image.png"}},"paths":{"/token":{"post":{"summary":"Get Token","operationId":"get_token_token_post","parameters":[{"required":true,"schema":{"title":"Client Id","type":"string"},"name":"client_id","in":"query"},{"required":true,"schema":{"title":"Secret","type":"string"},"name":"secret","in":"query"},{"required":false,"schema":{"title":"Redirect Url","type":"string"},"name":"redirect_url","in":"query"},{"required":false,"schema":{"title":"Timeline","type":"string"},"name":"timeline","in":"query"}],"requestBody":{"content":{"application/json":{"schema":{"title":"Credentials","type":"object"}}}},"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/token/verify":{"post":{"summary":"Verify Token","operationId":"verify_token_token_verify_post","parameters":[{"required":true,"schema":{"title":"Client Id","type":"string"},"name":"client_id","in":"query"},{"required":true,"schema":{"title":"Access Token","type":"string"},"name":"access_token","in":"query"}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/token/profile":{"post":{"summary":"Get Token Data","operationId":"get_token_data_token_profile_post","parameters":[{"required":true,"schema":{"title":"Id","type":"string"},"name":"id","in":"query"}],"responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}},"422":{"description":"Validation Error","content":{"application/json":{"schema":{"$ref":"#/components/schemas/HTTPValidationError"}}}}}}},"/":{"get":{"summary":"Root","operationId":"root__get","responses":{"200":{"description":"Successful Response","content":{"application/json":{"schema":{}}}}}}}},"components":{"schemas":{"HTTPValidationError":{"title":"HTTPValidationError","type":"object","properties":{"detail":{"title":"Detail","type":"array","items":{"$ref":"#/components/schemas/ValidationError"}}}},"ValidationError":{"title":"ValidationError","required":["loc","msg","type"],"type":"object","properties":{"loc":{"title":"Location","type":"array","items":{"type":"string"}},"msg":{"title":"Message","type":"string"},"type":{"title":"Error Type","type":"string"}}}}}}
+{
+  "openapi": "3.0.2",
+  "info": {
+    "title": "Powecred-Bank-E-statement-Upload",
+    "description": "This is OpenAPI v3 for Powercred-bank-estatement-ocr",
+    "version": "0.1.0",
+    "x-logo": {
+      "url": "https://storage.googleapis.com/powercred/image.png"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://mock.powercred.io",
+      "description": "Sandbox"
+    },
+    {
+      "url": "https://dev.powercred.io",
+      "description": "Production"
+    }
+  ],
+  "security": [
+    {
+      "ApiKeyAuth": [
+
+      ]
+    }
+  ],
+  "paths": {
+    "/auth/token": {
+      "post": {
+        "summary": "Generate authorization token",
+        "tags": [
+          "Authorization"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "string"
+                    },
+                    "url": {
+                      "type": "string"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "operationId": "post-auth-token",
+        "x-stoplight": {
+          "id": "nme4tne05y0vj"
+        },
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "default": "4xalxAtLhHGqin9Hy7Y07FllJepbmIe2b9VAZ1aBRFbicpbK"
+            },
+            "in": "query",
+            "name": "apikey",
+            "description": "API key",
+            "x-internal": true
+          },
+          {
+            "schema": {
+              "type": "string",
+              "default": "IUYcjcGTciEMblZ0Mkg96dYypoCvpgllFGUdZTM8rMw3p7BvdrQyOUh8GVVjvAFA"
+            },
+            "in": "query",
+            "name": "secret",
+            "description": "API secret key",
+            "x-internal": true
+          },
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "redirect_url",
+            "description": "Callback url to send data after extraction"
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "user_id": {
+                    "type": "string"
+                  }
+                },
+                "x-examples": {
+                  "Example 1": {
+                    "user_id": "textract-1"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+
+      ]
+    },
+    "/bank/analysis/stmt/upload": {
+      "post": {
+        "summary": "Upload jpg/png bank statement",
+        "operationId": "method_stmt_upload_img_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "$ref": "#/components/schemas/Body_method_stmt_upload_post"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+
+      ]
+    },
+    "/bank/analysis/stmt/upload/img": {
+      "post": {
+        "description": "Upload any PDF bank statement format using this endpoint",
+        "summary": "Upload PDF bank statement",
+        "operationId": "method_stmt_upload_post",
+        "parameters": [
+          {
+            "required": true,
+            "description": "Session ID as received from the authorization API",
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Password",
+              "type": "string"
+            },
+            "name": "password",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Is Img",
+              "type": "boolean",
+              "default": false
+            },
+            "name": "is_img",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Bankname",
+              "type": "string"
+            },
+            "name": "bankname",
+            "in": "query"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "title": "Files",
+                "type": "string",
+                "format": "binary"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+
+      ]
+    },
+    "/bank/analysis/stmt/publish": {
+      "post": {
+        "summary": "Start bank statement extraction",
+        "operationId": "method_stmt_publish_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/Region"
+            },
+            "name": "region",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+
+      ]
+    },
+    "/bank/analysis/modules": {
+      "post": {
+        "summary": "Generate analysis modules in excel format",
+        "operationId": "method_analysis_modules_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          },
+          {
+            "required": true,
+            "schema": {
+              "title": "Modules",
+              "type": "string"
+            },
+            "name": "modules",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Bank Name",
+              "type": "string"
+            },
+            "name": "bank_name",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+
+      ]
+    },
+    "/bank/transactions/analysis": {
+      "post": {
+        "summary": "Get account-wise transactions analysis",
+        "operationId": "method_transactions_analysis_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/api__routes__transactions__BankNames"
+            },
+            "name": "bank_name",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Generate Excel",
+              "type": "boolean",
+              "default": true
+            },
+            "name": "generate_excel",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Account Number",
+              "type": "string"
+            },
+            "name": "account_number",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Categorize",
+              "type": "boolean",
+              "default": false
+            },
+            "name": "categorize",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+
+      ]
+    },
+    "/bank/transactions/analysis/consolidate": {
+      "post": {
+        "summary": "Get consolidated transactions analysis for all accounts",
+        "operationId": "method_transactions_analysis_consolidate_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/api__routes__transactions__BankNames"
+            },
+            "name": "bank_name",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Acc Number",
+              "type": "string"
+            },
+            "name": "acc_number",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+
+      ]
+    },
+    "/bank/transactions/names": {
+      "get": {
+        "summary": "Get beneficiary names from transactions",
+        "operationId": "method_transactions_names_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/TransactionType"
+                }
+              ],
+              "default": "ALL"
+            },
+            "name": "transactions_type",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+
+      ]
+    },
+    "/bank/transactions/balances": {
+      "post": {
+        "summary": "Get top 5 beneficiary credit and debit transactions",
+        "operationId": "method_transactions_balances_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "allOf": [
+                {
+                  "$ref": "#/components/schemas/TransactionType"
+                }
+              ],
+              "default": "ALL"
+            },
+            "name": "transaction_type",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/api__routes__transactions__BankNames"
+            },
+            "name": "bank_name",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Generate Excel",
+              "type": "boolean",
+              "default": true
+            },
+            "name": "generate_excel",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Account Number",
+              "type": "string"
+            },
+            "name": "account_number",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+
+      ]
+    },
+    "/bank/transactions/balances/eod": {
+      "post": {
+        "summary": "Get end-of-day balances",
+        "operationId": "method_transactions_balances_eod_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/api__routes__transactions__BankNames"
+            },
+            "name": "bank_name",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Acc Number",
+              "type": "string"
+            },
+            "name": "acc_number",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Generate Excel",
+              "type": "boolean",
+              "default": true
+            },
+            "name": "generate_excel",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+
+      ]
+    },
+    "/bank/transactions/fraud": {
+      "post": {
+        "summary": "Get fraud indicated transactions",
+        "operationId": "method_transactions_fraud_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/api__routes__transactions__BankNames"
+            },
+            "name": "bank_name",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Account Number",
+              "type": "string"
+            },
+            "name": "account_number",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Generate Excel",
+              "type": "boolean",
+              "default": true
+            },
+            "name": "generate_excel",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+
+      ]
+    },
+    "/bank/transactions/analysis/check/tamper": {
+      "post": {
+        "summary": "Check for any tamper/edit on the document",
+        "operationId": "method_transactions_analysis_check_tamper_post",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/api__routes__transactions__BankNames"
+            },
+            "name": "bank_name",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Generate Excel",
+              "type": "boolean",
+              "default": true
+            },
+            "name": "generate_excel",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+
+      ]
+    },
+    "/bank/transactions/fetch": {
+      "get": {
+        "summary": "Get all transactions",
+        "operationId": "method_transactions_fetch_get",
+        "parameters": [
+          {
+            "required": true,
+            "schema": {
+              "title": "Id",
+              "type": "string"
+            },
+            "name": "id",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Account Number",
+              "type": "string"
+            },
+            "name": "Account_number",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "$ref": "#/components/schemas/api__routes__transactions__BankNames"
+            },
+            "name": "bank_name",
+            "in": "query"
+          },
+          {
+            "required": false,
+            "schema": {
+              "title": "Categorize",
+              "type": "boolean",
+              "default": false
+            },
+            "name": "categorize",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                }
+              }
+            }
+          },
+          "422": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/HTTPValidationError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "parameters": [
+
+      ]
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "ApiKeyAuth": {
+        "type": "apiKey",
+        "in": "query",
+        "name": "apikey"
+      }
+    },
+    "schemas": {
+      "Body_method_stmt_upload_img_post": {
+        "title": "Body_method_stmt_upload_img_post",
+        "type": "object",
+        "properties": {
+          "files": {
+            "title": "Files",
+            "type": "string",
+            "format": "binary"
+          }
+        }
+      },
+      "Body_method_stmt_upload_post": {
+        "title": "Body_method_stmt_upload_post",
+        "type": "object",
+        "properties": {
+          "files": {
+            "title": "Files",
+            "type": "string",
+            "format": "binary"
+          }
+        }
+      },
+      "HTTPValidationError": {
+        "title": "HTTPValidationError",
+        "type": "object",
+        "properties": {
+          "detail": {
+            "title": "Detail",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ValidationError"
+            }
+          }
+        }
+      },
+      "Region": {
+        "title": "Region",
+        "enum": [
+          "INDONESIA",
+          "MALAYSIA"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "SmartsheetTransactionType": {
+        "title": "SmartsheetTransactionType",
+        "enum": [
+          "CREDIT",
+          "DEBIT"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "TransactionType": {
+        "title": "TransactionType",
+        "enum": [
+          "CREDIT",
+          "DEBIT",
+          "ALL"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "ValidationError": {
+        "title": "ValidationError",
+        "required": [
+          "loc",
+          "msg",
+          "type"
+        ],
+        "type": "object",
+        "properties": {
+          "loc": {
+            "title": "Location",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "msg": {
+            "title": "Message",
+            "type": "string"
+          },
+          "type": {
+            "title": "Error Type",
+            "type": "string"
+          }
+        }
+      },
+      "api__models__request__BankNames": {
+        "title": "BankNames",
+        "enum": [
+          "BCA",
+          "MANDIRI",
+          "BRI",
+          "BNI",
+          "OCBC",
+          "PERMATA",
+          "CIMB",
+          "MAYBANK",
+          "multi_bank_ocr"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      },
+      "api__routes__transactions__BankNames": {
+        "title": "BankNames",
+        "enum": [
+          "BCA",
+          "MANDIRI",
+          "BRI",
+          "BNI",
+          "OCBC",
+          "PERMATA",
+          "CIMB",
+          "MAYBANK"
+        ],
+        "type": "string",
+        "description": "An enumeration."
+      }
+    }
+  }
+}
